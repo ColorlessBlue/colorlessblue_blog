@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="无色之蓝" description="学术随笔" locale="zh-CN">
+  <h1>无色之蓝</h1>
+
+  <p style="color: var(--color-text-light); margin-bottom: 2rem;">
+    我蓝色的逃逸线，不总是关于学术。
+  </p>
+
+  <ul class="section-list">
+    <!--
+      新文章按此格式添加：
+      <li>
+        <div class="item-header">
+          <span class="item-title">
+            <a href="/blog/文章文件名">文章标题</a>
+          </span>
+          <span class="item-meta">2024-01-15</span>
+        </div>
+        <div class="item-desc">文章摘要或第一段文字。</div>
+        <div>
+          <span class="tag">标签1</span>
+          <span class="tag">标签2</span>
+        </div>
+      </li>
+    -->
+    <li>
+      <div class="item-header">
+        <span class="item-title">
+          <a href="/blog/sha-bao">沙堡</a>
+        </span>
+        <span class="item-meta">2026-05-11</span>
+      </div>
+      <div class="item-desc">节选自《皮格马利翁》，关于Aria、海潮和时间。</div>
+      <div>
+        <span class="tag">长河</span>
+      </div>
+    </li>
+    <li>
+      <div class="item-header">
+        <span class="item-title">
+          <a href="/blog/die-meng-1">蝶梦（一）</a>
+        </span>
+        <span class="item-meta">2026-05-11</span>
+      </div>
+      <div class="item-desc">栩栩然蝴蝶也。</div>
+      <div>
+        <span class="tag">长河</span>
+      </div>
+    </li>
+  </ul>
+</Layout>
