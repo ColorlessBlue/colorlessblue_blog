@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  locale: 'zh-CN' | 'en';
+}
+
+const { title, description, locale } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+
+const otherLocaleUrl = locale === 'en'
+  ? (currentPath.replace(/^\/en/, '') || '/')
+  : '/en' + (currentPath === '/' ? '' : currentPath);
+
+const isCurrent = (path: string) => {
+  const normalized = currentPath.replace(/^\/en/, '') || '/';
+  return normalized === path || normalized.startsWith(path + '/');
+};
+
+const localize = (path: string) => locale === 'en' ? '/en' + path : path;
+---
+
+<!doctype html>
+<html lang={locale === 'en' ? 'en' : 'zh-CN'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description || title} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="top-bar">
+      <a href={otherLocaleUrl} class="lang-switch" title={locale === 'en' ? '切换到中文' : 'Switch to English'}>
+        {locale === 'en' ? '中文' : 'EN'}
+      </a>
+    </div>
+    <nav>
+      <a href={locale === 'en' ? '/en/' : '/'} class="site-title">Jingcan Yang</a>
+      <ul class="nav-links">
+        <li><a href={localize('/about')} class={isCurrent('/about') ? 'current' : ''}>{locale === 'en' ? 'About' : '关于'}</a></li>
+        <li><a href={localize('/education')} class={isCurrent('/education') ? 'current' : ''}>{locale === 'en' ? 'Education' : '教育背景'}</a></li>
+        <li><a href={localize('/experience')} class={isCurrent('/experience') ? 'current' : ''}>{locale === 'en' ? 'Experience' : '研究经历'}</a></li>
+        <li><a href={localize('/publications')} class={isCurrent('/publications') ? 'current' : ''}>{locale === 'en' ? 'Publications' : '学术发表'}</a></li>
+        <li><a href={localize('/awards')} class={isCurrent('/awards') ? 'current' : ''}>{locale === 'en' ? 'Awards' : '荣誉'}</a></li>
+        <li><a href={localize('/blog')} class={isCurrent('/blog') ? 'current' : ''}>{locale === 'en' ? 'Blog' : '博客'}</a></li>
+      </ul>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>&copy; {new Date().getFullYear()} &mdash; Built with Astro, written with love.</p>
+    </footer>
+  </body>
+</html>
