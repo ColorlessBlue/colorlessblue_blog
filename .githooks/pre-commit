@@ -1,0 +1,23 @@
+#!/bin/bash
+# Block commits containing sensitive files
+
+FORBIDDEN=(
+  "CLAUDE.md"
+  "CLAUDE.cn.md"
+  ".env"
+  "credentials.json"
+  "secrets.yml"
+  ".claude/"
+)
+
+STAGED=$(git diff --cached --name-only)
+
+for file in "${FORBIDDEN[@]}"; do
+  if echo "$STAGED" | grep -qE "^$file"; then
+    echo "  STOP: '$file' is blocked from being committed."
+    echo "  Add it to .gitignore if not already there."
+    exit 1
+  fi
+done
+
+exit 0
