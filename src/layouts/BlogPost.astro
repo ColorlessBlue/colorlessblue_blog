@@ -120,6 +120,7 @@ const { title, date, description, prev, next } = Astro.props.frontmatter as Fron
     border-top: 1px solid var(--color-border);
     font-family: var(--font-sans);
     font-size: 0.9rem;
+    white-space: normal;
   }
 
   .post-nav-item {
@@ -151,8 +152,9 @@ const { title, date, description, prev, next } = Astro.props.frontmatter as Fron
     }
 
     .post-nav {
-      gap: 0.4rem;
-      font-size: 0.82rem;
+      flex-wrap: nowrap;
+      gap: 0.35rem;
+      font-size: 0.8rem;
     }
 
     .post-nav-item {
