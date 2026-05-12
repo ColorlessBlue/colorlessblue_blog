@@ -11,14 +11,14 @@ const { title, description, locale } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
-const pathWithoutLocale = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/en/, '') || '/';
+const pathWithoutLocale = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/?en(?=\/|$)/, '') || '/';
 
 const otherLocaleUrl = base + (locale === 'en'
   ? pathWithoutLocale.replace(/^\//, '')
   : '/en' + (pathWithoutLocale === '/' ? '' : '/' + pathWithoutLocale)).replace(/^\//, '');
 
 const isCurrent = (path: string) => {
-  const normalized = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/en/, '') || '/';
+  const normalized = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/?en(?=\/|$)/, '') || '/';
   return normalized === path || normalized.startsWith(path + '/');
 };
 
