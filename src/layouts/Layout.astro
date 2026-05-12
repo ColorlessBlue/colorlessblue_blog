@@ -15,7 +15,7 @@ const pathWithoutLocale = currentPath.replace(new RegExp(`^${base}`), '').replac
 
 const otherLocaleUrl = base + (locale === 'en'
   ? pathWithoutLocale.replace(/^\//, '')
-  : '/en' + (pathWithoutLocale === '/' ? '' : pathWithoutLocale)).replace(/^\//, '');
+  : '/en' + (pathWithoutLocale === '/' ? '' : '/' + pathWithoutLocale)).replace(/^\//, '');
 
 const isCurrent = (path: string) => {
   const normalized = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/en/, '') || '/';
