@@ -149,5 +149,19 @@ const { title, date, description, prev, next } = Astro.props.frontmatter as Fron
     .post-title {
       font-size: 1.8rem;
     }
+
+    .post-nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .post-nav-item {
+      flex: none;
+    }
+
+    .post-nav-center {
+      order: 3;
+      width: 100%;
+    }
   }
 </style>

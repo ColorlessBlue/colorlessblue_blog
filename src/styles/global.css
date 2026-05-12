@@ -249,6 +249,7 @@ li {
   }
   nav .nav-links {
     margin-left: 0;
+    flex-wrap: wrap;
   }
   .section-list .item-header {
     flex-direction: column;
