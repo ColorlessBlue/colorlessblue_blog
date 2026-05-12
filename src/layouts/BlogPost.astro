@@ -9,11 +9,12 @@ interface Frontmatter {
   next?: { title: string; url: string };
 }
 
+const base = import.meta.env.BASE_URL;
 const { title, date, description, prev, next } = Astro.props.frontmatter as Frontmatter;
 ---
 
 <Layout title={`${title} — 无色之蓝`} description={description || title} locale="zh-CN">
-  <a href="/blog" class="post-back">&larr; 返回列表</a>
+  <a href={`${base}blog`} class="post-back">&larr; 返回列表</a>
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{title}</h1>
@@ -36,13 +37,13 @@ const { title, date, description, prev, next } = Astro.props.frontmatter as Fron
 
   <nav class="post-nav">
     <span class="post-nav-item post-nav-prev">
-      {prev && <a href={prev.url}>&larr; {prev.title}</a>}
+      {prev && <a href={`${base}${prev.url.replace(/^\//, '')}`}>&larr; {prev.title}</a>}
     </span>
     <span class="post-nav-item post-nav-center">
-      <a href="/blog">返回列表</a>
+      <a href={`${base}blog`}>返回列表</a>
     </span>
     <span class="post-nav-item post-nav-next">
-      {next && <a href={next.url}>{next.title} &rarr;</a>}
+      {next && <a href={`${base}${next.url.replace(/^\//, '')}`}>{next.title} &rarr;</a>}
     </span>
   </nav>
 </Layout>

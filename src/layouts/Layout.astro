@@ -9,18 +9,23 @@ interface Props {
 
 const { title, description, locale } = Astro.props;
 
+const base = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/en/, '') || '/';
 
-const otherLocaleUrl = locale === 'en'
-  ? (currentPath.replace(/^\/en/, '') || '/')
-  : '/en' + (currentPath === '/' ? '' : currentPath);
+const otherLocaleUrl = base + (locale === 'en'
+  ? pathWithoutLocale.replace(/^\//, '')
+  : '/en' + (pathWithoutLocale === '/' ? '' : pathWithoutLocale)).replace(/^\//, '');
 
 const isCurrent = (path: string) => {
-  const normalized = currentPath.replace(/^\/en/, '') || '/';
+  const normalized = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/en/, '') || '/';
   return normalized === path || normalized.startsWith(path + '/');
 };
 
-const localize = (path: string) => locale === 'en' ? '/en' + path : path;
+const localize = (path: string) => {
+  const p = locale === 'en' ? '/en' + path : path;
+  return base + p.replace(/^\//, '');
+};
 ---
 
 <!doctype html>
@@ -38,7 +43,7 @@ const localize = (path: string) => locale === 'en' ? '/en' + path : path;
       </a>
     </div>
     <nav>
-      <a href={locale === 'en' ? '/en/' : '/'} class="site-title">Jingcan Yang</a>
+      <a href={base + (locale === 'en' ? 'en/' : '')} class="site-title">Jingcan Yang</a>
       <ul class="nav-links">
         <li><a href={localize('/about')} class={isCurrent('/about') ? 'current' : ''}>{locale === 'en' ? 'About' : '关于'}</a></li>
         <li><a href={localize('/education')} class={isCurrent('/education') ? 'current' : ''}>{locale === 'en' ? 'Education' : '教育背景'}</a></li>
