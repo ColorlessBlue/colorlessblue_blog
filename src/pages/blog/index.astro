@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="无色之蓝" description="学术随笔" locale="zh-CN">
@@ -10,26 +12,10 @@ import Layout from '../../layouts/Layout.astro';
   </p>
 
   <ul class="section-list">
-    <!--
-      新文章按此格式添加：
-      <li>
-        <div class="item-header">
-          <span class="item-title">
-            <a href="/blog/文章文件名">文章标题</a>
-          </span>
-          <span class="item-meta">2024-01-15</span>
-        </div>
-        <div class="item-desc">文章摘要或第一段文字。</div>
-        <div>
-          <span class="tag">标签1</span>
-          <span class="tag">标签2</span>
-        </div>
-      </li>
-    -->
     <li>
       <div class="item-header">
         <span class="item-title">
-          <a href="/blog/sha-bao">沙堡</a>
+          <a href={`${base}blog/sha-bao`}>沙堡</a>
         </span>
         <span class="item-meta">2026-05-11</span>
       </div>
@@ -41,7 +27,7 @@ import Layout from '../../layouts/Layout.astro';
     <li>
       <div class="item-header">
         <span class="item-title">
-          <a href="/blog/die-meng-1">蝶梦（一）</a>
+          <a href={`${base}blog/die-meng-1`}>蝶梦（一）</a>
         </span>
         <span class="item-meta">2026-05-11</span>
       </div>

@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Jingcan Yang | Academic Homepage" description="Personal academic homepage of Jingcan Yang" locale="en">
@@ -16,8 +18,8 @@ import Layout from '../../layouts/Layout.astro';
   </p>
 
   <p>
-    <a href="/en/about" class="cv-download">Learn More</a>
+    <a href={`${base}en/about`} class="cv-download">Learn More</a>
     &nbsp;
-    <a href="/cv.pdf" class="cv-download">Download CV (PDF)</a>
+    <a href={`${base}cv_en_Jingcan Yang.pdf`} class="cv-download">Download CV (PDF)</a>
   </p>
 </Layout>
