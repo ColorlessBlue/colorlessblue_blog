@@ -13,9 +13,9 @@ const base = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
 const pathWithoutLocale = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/?en(?=\/|$)/, '') || '/';
 
-const otherLocaleUrl = base + (locale === 'en'
-  ? pathWithoutLocale.replace(/^\//, '')
-  : '/en' + (pathWithoutLocale === '/' ? '' : '/' + pathWithoutLocale)).replace(/^\//, '');
+const switchPath = pathWithoutLocale.replace(/^\//, '').replace(/\/$/, '');
+const translatedPath = switchPath.startsWith('blog/') ? 'blog' : switchPath;
+const otherLocaleUrl = base + (locale === 'en' ? '' : 'en/') + translatedPath;
 
 const isCurrent = (path: string) => {
   const normalized = currentPath.replace(new RegExp(`^${base}`), '').replace(/^\/?en(?=\/|$)/, '') || '/';
