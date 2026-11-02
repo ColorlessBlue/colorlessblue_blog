@@ -11,6 +11,10 @@ const site = new URL(config.site);
 const pageFiles = readdirSync(pages, { recursive: true })
   .filter((file) => /\.(astro|md)$/.test(file));
 
+test('withdrawn teaching page', () => {
+  assert.ok(!existsSync(new URL('teaching/index.html', dist)));
+});
+
 function outputFile(url) {
   assert.ok(url.pathname.startsWith(base), `Missing deployment base: ${url.pathname}`);
   const path = decodeURIComponent(url.pathname.slice(base.length));
