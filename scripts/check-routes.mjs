@@ -33,6 +33,16 @@ for (const file of pageFiles) {
     assert.ok(/<title>[^<]+<\/title>/.test(html), 'Missing page title');
     assert.ok(/<h1\b[^>]*>[\s\S]+?<\/h1>/.test(html), 'Missing heading');
 
+    const section = route.replace(/^en(?:\/|$)/, '').split('/')[0];
+    const currentLinks = [...html.matchAll(/<a\b[^>]*class="current"[^>]*>/g)];
+    if (section) {
+      assert.equal(currentLinks.length, 1, 'Missing or duplicate current navigation item');
+      const expected = base + (language === 'en' ? 'en/' : '') + section;
+      assert.ok(currentLinks[0][0].includes(`href="${expected}"`), 'Incorrect current navigation item');
+    } else {
+      assert.equal(currentLinks.length, 0, 'Homepage highlights an unrelated section');
+    }
+
     for (const [, value] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
       const target = new URL(value.replaceAll('&amp;', '&'), url);
       if (target.origin !== site.origin) continue;
